@@ -1,0 +1,89 @@
+<form
+  [formGroup]="form"
+  (ngSubmit)="onSubmit()"
+>
+  <mat-card class="card">
+
+    <mat-card-title class="card__title">Register</mat-card-title>
+
+    <p class="text__error" *ngIf="errorMessage">{{errorMessage}}</p>
+
+    <!-- Name -->
+    <mat-form-field>
+      <mat-label>Enter your name</mat-label>
+      <input
+        matInput
+        type="text"
+        formControlName="username"
+      >
+      <mat-hint
+        class="text__error"
+        *ngIf="form.get('username').invalid && form.get('username').touched"
+      >
+        <span *ngIf="form.get('username').errors['required']">Name required</span>
+        <span
+          *ngIf="form.get('username').errors['minlength'] && form.get('username').errors['minlength']['requiredLength']"
+        >
+          Min name length is {{form.get('username').errors['minlength']['requiredLength']}},
+          now is {{form.get('username').errors['minlength']['actualLength']}}
+        </span>
+      </mat-hint>
+    </mat-form-field>
+
+    <!-- Email -->
+    <mat-form-field>
+      <mat-label>Enter your email</mat-label>
+      <input
+        matInput
+        type="email"
+        formControlName="email"
+      >
+      <mat-hint
+        class="text__error"
+        *ngIf="form.get('email').invalid && form.get('email').touched"
+      >
+        <span *ngIf="form.get('email').errors['required']">Email required</span>
+        <span *ngIf="form.get('email').errors['email']">Enter valid email</span>
+      </mat-hint>
+    </mat-form-field>
+
+    <!-- Password -->
+    <mat-form-field>
+      <mat-label>Enter your password</mat-label>
+      <input
+        matInput
+        [type]="hidePassword ? 'password' : 'text'"
+        formControlName="password"
+      >
+      <button
+        mat-icon-button
+        matSuffix
+        (click)="hidePassword = !hidePassword"
+      >
+        <mat-icon>{{hidePassword ? 'visibility_off' : 'visibility'}}</mat-icon>
+      </button>
+      <mat-hint
+        class="text__error"
+        *ngIf="form.get('password').invalid && form.get('password').touched"
+      >
+        <span *ngIf="form.get('password').errors['required']">Password required</span>
+        <span
+          *ngIf="form.get('password').errors['minlength'] && form.get('password').errors['minlength']['requiredLength']"
+        >
+          Min password length is {{form.get('password').errors['minlength']['requiredLength']}},
+          now is {{form.get('password').errors['minlength']['actualLength']}}
+        </span>
+      </mat-hint>
+    </mat-form-field>
+
+    <button
+      mat-button
+      color="primary"
+      type="submit"
+      class="card__button"
+      [disabled]="form.invalid || form.disabled"
+    >Register
+    </button>
+
+  </mat-card>
+</form>

@@ -1,0 +1,23 @@
+.toolbar-nav {
+  margin-left: auto;
+
+  &__list { // .toolbar-nav__list
+    display: flex;
+    padding: 0;
+  }
+
+  &__item { // .toolbar-nav__item
+    list-style-type: none;
+    padding: 0 15px;
+  }
+
+  &__link { // .toolbar-nav__link
+    font-size: 16px;
+    color: #fff;
+    text-decoration: none;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+}

@@ -1,0 +1,13 @@
+@import '/src/app/shared/scss/card';
+@import '/src/app/shared/scss/link';
+
+.profile {
+  &__menu { // .profile__menu
+    margin-top: 15px;
+    padding: 0;
+  }
+
+  &__menu-item { // .profile__menu-item
+    list-style-type: none;
+  }
+}

@@ -1,0 +1,60 @@
+
+  <form [formGroup]="form" (ngSubmit)="onSubmit()">
+    <mat-card class="card">
+      <mat-card-title class="card__title">Send PW</mat-card-title>
+
+      <p class="text__error" *ngIf="errorMessage">{{errorMessage}}</p>
+      <p class="text__success" *ngIf="transactionSuccessStatus">Success: {{transaction.amount}} PW
+        to {{transaction.name}}</p>
+
+      <!-- User name -->
+      <mat-form-field class="transaction__form-group">
+        <mat-label>User name</mat-label>
+        <input
+          matInput
+          type="text"
+          formControlName="name"
+          [matAutocomplete]="users"
+          (ngModelChange)="getFilteredUsers($event)"
+        >
+        <mat-autocomplete #users="matAutocomplete">
+          <mat-option *ngFor="let user of (filteredUsers)" [value]="user.name">
+            {{ user.name }}
+          </mat-option>
+        </mat-autocomplete>
+        <mat-hint
+          class="text__error"
+          *ngIf="form.get('name').invalid && form.get('name').touched"
+        >
+          <span *ngIf="form.get('name').errors['required']">User name required</span>
+        </mat-hint>
+      </mat-form-field>
+
+      <!-- Amount -->
+      <mat-form-field appearance="legacy">
+        <mat-label>Amount</mat-label>
+        <input
+          matInput type="number"
+          formControlName="amount"
+        />
+        <span matSuffix>PW</span>
+        <mat-hint
+          class="auth__error"
+          *ngIf="form.get('amount').invalid && form.get('amount').touched"
+        >
+          <span *ngIf="form.get('amount').errors['required']">Amount required</span>
+          <span *ngIf="form.get('amount').errors['minBalance']">Amount must be greater then 0</span>
+          <span *ngIf="form.get('amount').errors['maxBalance']">Not enough PW for this operation</span>
+        </mat-hint>
+      </mat-form-field>
+
+      <button
+        mat-raised-button
+        color="primary"
+        class="card__button"
+        [disabled]="form.invalid || form.disabled"
+      >
+        Send PW
+      </button>
+    </mat-card>
+  </form>

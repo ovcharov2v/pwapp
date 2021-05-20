@@ -1,0 +1,24 @@
+.card {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: 400px;
+  padding: 30px;
+
+  &--table { // .card--table
+    margin-bottom: 30px;
+  }
+
+  &__title { // .card__title
+    margin-bottom: 30px;
+  }
+
+  &__button { // .card__button
+    margin-top: 15px;
+  }
+
+  &__empty-message { // .card__empty-message
+    color: #999;
+  }
+
+}

@@ -1,0 +1,49 @@
+<mat-toolbar color="primary" class="toolbar">
+  <div *ngIf="apiService.isAuthentificated()">
+    <!-- Menu -->
+    <button mat-icon-button [matMenuTriggerFor]="menu">
+      <mat-icon>more_vert</mat-icon>
+    </button>
+    <mat-menu #menu="matMenu" class="toolbar-menu">
+      <ul class="toolbar-menu__list">
+        <li class="toolbar-menu__item">
+          <a routerLink="/" class="toolbar-menu__link link" routerLinkActive="toolbar-menu__link--active link--active" [routerLinkActiveOptions]="{exact: true}">Profile</a>
+        </li>
+        <li class="toolbar-menu__item">
+          <a routerLink="/transaction" class="toolbar-menu__link link" routerLinkActive="toolbar-menu__link--active link--active">New transaction</a>
+        </li>
+        <li class="toolbar-menu__item">
+          <a routerLink="/history" class="toolbar-menu__link link" routerLinkActive="toolbar-menu__link--active link--active">Transaction history</a>
+        </li>
+      </ul>
+    </mat-menu>
+  </div>
+
+  <!-- Slogan -->
+  <span>PW App</span>
+
+  <div class="toolbar-user" *ngIf="apiService.isAuthentificated(); else authLinks">
+    <!-- User info -->
+    <p class="toolbar-user__text">
+      Hello {{user.name}}, you have {{user.balance}} PW
+      (<a routerLink="/auth/login" class="toolbar-user__link" (click)="apiService.logout()">Logout</a>)
+    </p>
+  </div>
+  <ng-template #authLinks>
+    <!-- Auth links -->
+    <nav class="toolbar-nav">
+      <ul class="toolbar-nav__list">
+        <li class="toolbar-nav__item">
+          <a routerLink="/auth/login" routerLinkActive="toolbar-nav__link--active" class="toolbar-nav__link">Login</a>
+        </li>
+        <li class="toolbar-nav__item">
+          <a routerLink="/auth/register"routerLinkActive="toolbar-nav__link--active" class="toolbar-nav__link">Register</a>
+        </li>
+      </ul>
+  </nav>
+  </ng-template>
+</mat-toolbar>
+
+<div class="container">
+  <router-outlet></router-outlet>
+</div>

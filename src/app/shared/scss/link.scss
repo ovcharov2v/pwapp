@@ -1,0 +1,13 @@
+.link {
+  text-decoration: none;
+  color: #2196f3;
+  transition: color 0.3s;
+
+  &:hover {
+    color: darken(#2196f3, 15%);
+  }
+
+  &--active {
+    color: darken(#2196f3, 15%);
+  }
+}

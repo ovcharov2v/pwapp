@@ -1,0 +1,23 @@
+.toolbar-menu {
+  padding: 0;
+
+  &__list { // .toolbar-menu__list
+    margin: 0;
+    padding: 0;
+  }
+
+  &__item { // .toolbar-menu__item
+    display: block;
+    list-style-type: none;
+  }
+
+  &__link { // .toolbar-menu__link
+    display: block;
+    padding: 15px;
+    font-size: 16px;
+
+    &--active {
+      background-color: #f7f7f7;
+    }
+  }
+}
