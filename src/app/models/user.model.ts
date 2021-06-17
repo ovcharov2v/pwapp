@@ -3,7 +3,4 @@ export class UserModel {
   name: string;
   email: string;
   balance: number;
-  token: string;
-  tokenExpDate: string;
-  loginDate: string;
 }

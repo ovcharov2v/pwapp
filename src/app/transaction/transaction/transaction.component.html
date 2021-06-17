@@ -24,9 +24,9 @@
         </mat-autocomplete>
         <mat-hint
           class="text__error"
-          *ngIf="form.get('name').invalid && form.get('name').touched"
+          *ngIf="name.invalid && name.touched"
         >
-          <span *ngIf="form.get('name').errors['required']">User name required</span>
+          <span *ngIf="name.errors?.required">User name required</span>
         </mat-hint>
       </mat-form-field>
 
@@ -40,11 +40,11 @@
         <span matSuffix>PW</span>
         <mat-hint
           class="auth__error"
-          *ngIf="form.get('amount').invalid && form.get('amount').touched"
+          *ngIf="amount.invalid && amount.touched"
         >
-          <span *ngIf="form.get('amount').errors['required']">Amount required</span>
-          <span *ngIf="form.get('amount').errors['minBalance']">Amount must be greater then 0</span>
-          <span *ngIf="form.get('amount').errors['maxBalance']">Not enough PW for this operation</span>
+          <span *ngIf="amount.errors?.required">Amount required</span>
+          <span *ngIf="amount.errors?.min">Amount must be greater then 0</span>
+          <span *ngIf="amount.errors?.maxBalance">Not enough PW for this operation</span>
         </mat-hint>
       </mat-form-field>
 

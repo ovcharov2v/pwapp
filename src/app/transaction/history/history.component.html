@@ -1,0 +1,26 @@
+<mat-card class="card card--table">
+    <mat-card-title class="card__title">My transaction list</mat-card-title>
+    <div *ngIf="myTransactionDataSource && myTransactionDataSource.length > 0; else myTransactionEmpty;">
+      <app-history-table
+        [dataSource]="myTransactionDataSource"
+        [columns]="myDisplayedColumns"
+        [showRepeat]="true"
+        (repeatTransaction)="repeatTransaction($event)"
+      >
+      </app-history-table>
+    </div>
+    <ng-template #myTransactionEmpty>
+      <h2 class="card__empty-message">No data yet</h2>
+    </ng-template>
+</mat-card>
+
+  <mat-card class="card card--table">
+    <mat-card-title class="card__title">Income transaction list</mat-card-title>
+
+    <div *ngIf="incomeTransactionDataSource && incomeTransactionDataSource.length > 0; else incomeTransactionEmpty">
+      <app-history-table [dataSource]="incomeTransactionDataSource" [columns]="displayedColumns" [showRepeat]="false"></app-history-table>
+    </div>
+    <ng-template #incomeTransactionEmpty>
+      <h2 class="card__empty-message">No data yet</h2>
+    </ng-template>
+</mat-card>

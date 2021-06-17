@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import {ApiService} from '../../api.service';
-import {UserModel} from '../../user.model';
+import { map } from 'rxjs/operators';
+import { UserService } from 'src/app/services/user.service';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-layout',
@@ -9,16 +10,16 @@ import {UserModel} from '../../user.model';
 })
 export class LayoutComponent implements OnInit {
 
-  user: UserModel;
-  constructor(public apiService: ApiService) {
-    apiService.userChanged.subscribe(
-      res => this.user = res
-    );
-  }
+  constructor(public userService: UserService, public authService: AuthService) { }
 
   ngOnInit(): void {
-
-
   }
 
+  get userName$() {
+      return this.userService.user.pipe(map(u => u.name));
+  }
+
+  get userBalance$() {
+    return this.userService.user.pipe(map(u => u.balance));
+  }
 }

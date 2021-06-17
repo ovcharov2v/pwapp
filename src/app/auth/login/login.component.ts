@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import {FormControl, FormGroup, Validators} from '@angular/forms';
-import {ActivatedRoute, Router} from '@angular/router';
-import {HttpErrorResponse} from '@angular/common/http';
-import {ApiService} from '../../api.service';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
+import { HttpErrorResponse } from '@angular/common/http';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-login',
@@ -14,7 +14,7 @@ export class LoginComponent implements OnInit {
   form: FormGroup;
   errorMessage: string;
 
-  constructor(private apiService: ApiService, private router: Router) { }
+  constructor(private authService: AuthService, private router: Router) { }
 
   ngOnInit(): void {
     this.hidePassword = true;
@@ -33,7 +33,7 @@ export class LoginComponent implements OnInit {
   onSubmit(): void {
     this.form.disable();
     this.errorMessage = '';
-    this.apiService.login(this.form.value).subscribe(
+    this.authService.login(this.form.value).subscribe(
       () => {
         this.router.navigate(['/']);
       },

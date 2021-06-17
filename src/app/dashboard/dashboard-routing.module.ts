@@ -1,22 +1,15 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import {ProfileComponent} from './profile/profile.component';
-import {TransactionComponent} from './transaction/transaction.component';
-import {HistoryComponent} from './history/history.component';
 
 const routes: Routes = [
   {
     path: '',
-    component: ProfileComponent
+    loadChildren: () => import('../profile/profile.module').then(m => m.ProfileModule),
   },
   {
     path: 'transaction',
-    component: TransactionComponent
+    loadChildren: () => import('../transaction/transaction.module').then(m => m.TransactionModule),
   },
-  {
-    path: 'history',
-    component: HistoryComponent
-  }
 ];
 
 @NgModule({

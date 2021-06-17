@@ -2,7 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {HttpErrorResponse} from '@angular/common/http';
 import {Router} from '@angular/router';
-import {ApiService} from '../../api.service';
+import { AuthService } from './../../services/auth.service';
 
 @Component({
   selector: 'app-register',
@@ -15,7 +15,7 @@ export class RegisterComponent implements OnInit {
   form: FormGroup;
   errorMessage: string;
 
-  constructor(private apiService: ApiService, private router: Router) {
+  constructor(private authService: AuthService, private router: Router) {
   }
 
   ngOnInit(): void {
@@ -39,9 +39,8 @@ export class RegisterComponent implements OnInit {
   onSubmit(): void {
     this.form.disable();
     this.errorMessage = '';
-    this.apiService.register(this.form.value).subscribe(
-      response => {
-        sessionStorage.setItem('token', JSON.stringify(response.id_token));
+    this.authService.register(this.form.value).subscribe(
+      () => {
         this.router.navigate(['/']);
       },
       (error: HttpErrorResponse) => {

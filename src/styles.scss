@@ -37,3 +37,9 @@ $pwapp-theme: mat-light-theme((
 
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+@import 'scss/container';
+@import 'scss/table';
+@import 'scss/text';
+@import 'scss/link';
+@import 'scss/card';

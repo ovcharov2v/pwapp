@@ -1,5 +1,5 @@
 <mat-toolbar color="primary" class="toolbar">
-  <div *ngIf="apiService.isAuthentificated()">
+  <div *ngIf="authService.isAuthentificated()">
     <!-- Menu -->
     <button mat-icon-button [matMenuTriggerFor]="menu">
       <mat-icon>more_vert</mat-icon>
@@ -10,10 +10,10 @@
           <a routerLink="/" class="toolbar-menu__link link" routerLinkActive="toolbar-menu__link--active link--active" [routerLinkActiveOptions]="{exact: true}">Profile</a>
         </li>
         <li class="toolbar-menu__item">
-          <a routerLink="/transaction" class="toolbar-menu__link link" routerLinkActive="toolbar-menu__link--active link--active">New transaction</a>
+          <a routerLink="/transaction/new" class="toolbar-menu__link link" routerLinkActive="toolbar-menu__link--active link--active">New transaction</a>
         </li>
         <li class="toolbar-menu__item">
-          <a routerLink="/history" class="toolbar-menu__link link" routerLinkActive="toolbar-menu__link--active link--active">Transaction history</a>
+          <a routerLink="/transaction/history" class="toolbar-menu__link link" routerLinkActive="toolbar-menu__link--active link--active">Transaction history</a>
         </li>
       </ul>
     </mat-menu>
@@ -22,11 +22,11 @@
   <!-- Slogan -->
   <span>PW App</span>
 
-  <div class="toolbar-user" *ngIf="apiService.isAuthentificated(); else authLinks">
+  <div class="toolbar-user" *ngIf="authService.isAuthentificated(); else authLinks">
     <!-- User info -->
     <p class="toolbar-user__text">
-      Hello {{user.name}}, you have {{user.balance}} PW
-      (<a routerLink="/auth/login" class="toolbar-user__link" (click)="apiService.logout()">Logout</a>)
+      Hello {{userName$ | async}}, you have {{userBalance$ | async}} PW
+      (<a routerLink="/auth/login" class="toolbar-user__link" (click)="authService.logout()">Logout</a>)
     </p>
   </div>
   <ng-template #authLinks>

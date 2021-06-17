@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
-import {TransactionModel} from '../transaction/transaction.model';
 import {Router} from '@angular/router';
-import {ApiService} from '../../api.service';
+import { TransactionService } from './../../services/transaction.service';
+import { TransactionModel } from './../../models/transaction.model';
 
 
 @Component({
@@ -17,15 +17,13 @@ export class HistoryComponent implements OnInit {
 
   constructor(
     private router: Router,
-    private apiService: ApiService,
+    private transactionService: TransactionService,
   ) { }
 
   ngOnInit() {
-    this.apiService.getTransactionList().subscribe(list => {
-      this.myTransactionDataSource = list.trans_token.filter(el => el.amount < 0).map(el => {
-        return {...el, amount: Math.abs(el.amount)};
-      });
-      this.incomeTransactionDataSource = list.trans_token.filter(el => el.amount > 0);
+    this.transactionService.getTransactionList().subscribe(list => {
+      this.myTransactionDataSource = list.my
+      this.incomeTransactionDataSource = list.income
     });
   }
 
